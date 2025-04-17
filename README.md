@@ -83,7 +83,3 @@ To run the backend along with MongoDB using Docker Compose:
 ## License
 
 This project is open source and distributed under the [MIT License](LICENSE).
-
----
-
-Contributions and enhancements are welcome. Happy coding!
