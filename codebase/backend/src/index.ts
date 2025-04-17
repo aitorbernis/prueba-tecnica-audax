@@ -1,10 +1,9 @@
 import dotenv from "dotenv";
 
-import Balance from "./models/Balance";
+import connectDB from "./config/db";
+import { fetchAndSaveBalance } from "./services/reeService";
 
 dotenv.config();
-
-import connectDB from "./config/db";
 
 const start = async (): Promise<void> => {
   console.log("🚀 Starting application...");
@@ -12,18 +11,14 @@ const start = async (): Promise<void> => {
   console.log("🎉 App initialized successfully.");
 };
 
+const testRee = async () => {
+  try {
+    await fetchAndSaveBalance("2023-01-01T00:00", "2023-01-31T23:59", "day");
+    console.log("🎉 REE ingestion test OK");
+  } catch (e) {
+    console.error("❌ REE ingestion test FAILED", e);
+  }
+};
+
 start();
-
-// const test = async () => {
-//   const now = new Date();
-//   await Balance.create({
-//     datetime: now,
-//     generation: 1000,
-//     demand: 950,
-//     netInterchanges: 50,
-//   });
-//   const found = await Balance.findOne({ datetime: now });
-//   console.log("Inserted & read back:", found);
-// };
-
-// test().catch(console.error);
+testRee();
